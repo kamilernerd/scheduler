@@ -20,6 +20,7 @@ func TaskManager() *Scheduler {
 func (s *Scheduler) AddTask(t *Task) {
 	s.mut.Lock()
 	t.LastRun = t.Time
+	t.FirstRun = t.Time
 	s.task_groups = append(s.task_groups, t)
 	s.mut.Unlock()
 }

@@ -13,6 +13,7 @@ type TASK_CALLBACK = func(t *Task)
 type Task struct {
 	Name      string
 	Condition string
+	FirstRun  string
 	Time      string
 	LastRun   string
 	Cb        TASK_CALLBACK
