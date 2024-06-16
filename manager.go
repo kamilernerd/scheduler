@@ -36,11 +36,12 @@ func (s *Scheduler) Run() {
 			if GetCurrentTimeInFormat() == FormatTime(ParseTimeFormat(v.Time)) {
 				go v.Cb(v)
 				v.reschedule()
-				// Catch all tasks with time defined far back and reschedule
-			} else if GetCurrentTimeInFormat() > FormatTime(ParseTimeFormat(v.Time)) {
-				go v.Cb(v)
-				v.reschedule()
 			}
+			// Catch all tasks with time defined far back and reschedule
+			// else if GetCurrentTimeInFormat() > FormatTime(ParseTimeFormat(v.Time)) {
+			// 	go v.Cb(v)
+			// 	v.reschedule()
+			// }
 		}
 		time.Sleep(time.Duration(time.Millisecond * 50))
 	}

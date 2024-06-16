@@ -1,5 +1,3 @@
-module example.com/scheduler
+module github.com/kamilernerd/scheduler
 
-go 1.22.4
-
-require github.com/aptible/supercronic v0.2.30 // indirect
+go 1.22.2

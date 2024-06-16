@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"example.com/scheduler"
+	"github.com/kamilernerd/scheduler"
 )
 
 func Callback(t *scheduler.Task) {
@@ -17,7 +17,7 @@ func main() {
 	manager.AddTask(&scheduler.Task{
 		Name:      "TASK AT SPECIFIC TIME",
 		Time:      scheduler.FormatTime(scheduler.ParseTimeFormat("2024-06-16T22:12:00+02:00")),
-		Condition: "every 1 second",
+		Condition: "every 1 minute",
 		Cb:        Callback,
 	})
 
@@ -50,8 +50,8 @@ func main() {
 	})
 
 	manager.AddTask(&scheduler.Task{
-		Name:      "TASK EVERY 1 SECOND WITH NO TIME SPECIFIED",
-		Condition: "every 1 second",
+		Name:      "TASK EVERY 15 SECOND",
+		Condition: "every 15 second",
 		Time:      scheduler.FormatTime(time.Now().Add(time.Minute * 3)),
 		Cb:        Callback,
 	})

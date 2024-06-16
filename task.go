@@ -1,7 +1,6 @@
 package scheduler
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -46,7 +45,6 @@ func (t *Task) reschedule() {
 				scheduleOffset = time.Duration(time.Minute * time.Duration(durationAsNumber))
 			case "second":
 				scheduleOffset = time.Duration(time.Second * time.Duration(durationAsNumber))
-				fmt.Println(scheduleOffset)
 			case "day":
 				d := ParseTimeFormat(t.Time).AddDate(0, 0, durationAsNumber)
 				t.updateLastRun()
