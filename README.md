@@ -25,9 +25,6 @@ func main() {
 Task scheduler allows you to specify time at which a callback has to be
 executed. Use settings below to adjust the frequency of rescheduling.
 
-Tasks defined with time back in time will NOT be run until the next day and the same time and rescheduled according
-to the condition provided.
-
 Tasks that have no reschedule condition provided will be run once per 24h
 
 Available conditions
