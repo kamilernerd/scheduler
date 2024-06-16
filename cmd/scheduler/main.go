@@ -7,7 +7,7 @@ import (
 	"example.com/scheduler"
 )
 
-func Callback(t scheduler.Task) {
+func Callback(t *scheduler.Task) {
 	fmt.Printf("\nRescheduling task: %s Old time: %s New time: %+v\n", t.Name, t.LastRun, t.Time)
 }
 
@@ -15,9 +15,10 @@ func main() {
 	manager := scheduler.TaskManager()
 
 	manager.AddTask(&scheduler.Task{
-		Name: "TASK AT SPECIFIC TIME",
-		Time: scheduler.FormatTime(time.Now().Add(time.Second * 10)),
-		Cb:   Callback,
+		Name:      "TASK AT SPECIFIC TIME",
+		Time:      scheduler.FormatTime(scheduler.ParseTimeFormat("2024-06-16T22:12:00+02:00")),
+		Condition: "every 1 second",
+		Cb:        Callback,
 	})
 
 	manager.AddTask(&scheduler.Task{

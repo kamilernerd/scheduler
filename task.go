@@ -1,6 +1,7 @@
 package scheduler
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -8,7 +9,7 @@ import (
 
 type TASK_TYPE string
 
-type TASK_CALLBACK = func(t Task)
+type TASK_CALLBACK = func(t *Task)
 
 type Task struct {
 	Name      string
@@ -45,6 +46,7 @@ func (t *Task) reschedule() {
 				scheduleOffset = time.Duration(time.Minute * time.Duration(durationAsNumber))
 			case "second":
 				scheduleOffset = time.Duration(time.Second * time.Duration(durationAsNumber))
+				fmt.Println(scheduleOffset)
 			case "day":
 				d := ParseTimeFormat(t.Time).AddDate(0, 0, durationAsNumber)
 				t.updateLastRun()
@@ -61,6 +63,10 @@ func (t *Task) reschedule() {
 func (t *Task) parseTaskCondition() *TaskCondition {
 	if t.Condition != "" {
 		splitted := strings.Split(t.Condition, " ")
+
+		if len(splitted) < 3 {
+			return nil
+		}
 
 		expression := splitted[0]
 		timeDuration := splitted[1]

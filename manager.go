@@ -32,14 +32,17 @@ func (s *Scheduler) RemoveTask(index int) {
 
 func (s *Scheduler) Run() {
 	for {
-		for i, v := range s.task_groups {
+		for _, v := range s.task_groups {
 			if GetCurrentTimeInFormat() == FormatTime(ParseTimeFormat(v.Time)) {
-				go v.Cb(*v)
+				go v.Cb(v)
 				v.reschedule()
-				s.task_groups[i] = v
+				// Catch all tasks with time defined far back and reschedule
+			} else if GetCurrentTimeInFormat() > FormatTime(ParseTimeFormat(v.Time)) {
+				go v.Cb(v)
+				v.reschedule()
 			}
 		}
-		time.Sleep(time.Duration(time.Second))
+		time.Sleep(time.Duration(time.Millisecond * 50))
 	}
 }
 
