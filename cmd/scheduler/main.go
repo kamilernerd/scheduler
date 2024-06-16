@@ -15,18 +15,18 @@ func main() {
 	manager := scheduler.TaskManager()
 
 	manager.AddTask(&scheduler.Task{
-		Name:      "TASK AT SPECIFIC TIME",
-		Time:      scheduler.FormatTime(scheduler.ParseTimeFormat("2024-06-16T22:12:00+02:00")),
+		Name:      "TASK EVERY 1 MINUTE",
+		Time:      scheduler.FormatTime(scheduler.ParseTimeFormat("2024-06-16T22:40:00+02:00")),
 		Condition: "every 1 minute",
 		Cb:        Callback,
 	})
 
-	manager.AddTask(&scheduler.Task{
-		Name:      "TASK EVERY 1 SECOND",
-		Time:      scheduler.FormatTime(time.Now().Add(time.Second * 2)),
-		Condition: "every 1 second",
-		Cb:        Callback,
-	})
+	// manager.AddTask(&scheduler.Task{
+	// 	Name:      "TASK EVERY 1 SECOND",
+	// 	Time:      scheduler.FormatTime(time.Now().Add(time.Second * 2)),
+	// 	Condition: "every 1 second",
+	// 	Cb:        Callback,
+	// })
 
 	manager.AddTask(&scheduler.Task{
 		Name:      "TASK EVERY 4 SECONDS",
@@ -34,13 +34,13 @@ func main() {
 		Condition: "every 4 second",
 		Cb:        Callback,
 	})
-
-	manager.AddTask(&scheduler.Task{
-		Name:      "TASK EVERY 1 HOUR",
-		Time:      scheduler.FormatTime(time.Now().Add(time.Minute)),
-		Condition: "every 1 hour",
-		Cb:        Callback,
-	})
+	//
+	// manager.AddTask(&scheduler.Task{
+	// 	Name:      "TASK EVERY 1 HOUR",
+	// 	Time:      scheduler.FormatTime(time.Now().Add(time.Minute)),
+	// 	Condition: "every 1 hour",
+	// 	Cb:        Callback,
+	// })
 
 	manager.AddTask(&scheduler.Task{
 		Name:      "TASK EVERY 1 DAY",
@@ -48,13 +48,13 @@ func main() {
 		Condition: "every 1 day",
 		Cb:        Callback,
 	})
-
-	manager.AddTask(&scheduler.Task{
-		Name:      "TASK EVERY 15 SECOND",
-		Condition: "every 15 second",
-		Time:      scheduler.FormatTime(time.Now().Add(time.Minute * 3)),
-		Cb:        Callback,
-	})
+	//
+	// manager.AddTask(&scheduler.Task{
+	// 	Name:      "TASK EVERY 15 SECOND",
+	// 	Condition: "every 15 second",
+	// 	Time:      scheduler.FormatTime(time.Now().Add(time.Minute * 3)),
+	// 	Cb:        Callback,
+	// })
 
 	manager.ListTasks()
 
