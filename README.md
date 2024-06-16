@@ -31,8 +31,8 @@ to the condition provided.
 Tasks that have no reschedule condition provided will be run once per 24h
 
 Available conditions
-- every X second
-- every X minute
-- every X hour
-- every X day
+- every X second/seconds
+- every X minute/minutes
+- every X hour/hours
+- every X day/days
 
