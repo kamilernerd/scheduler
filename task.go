@@ -11,16 +11,15 @@ type TASK_TYPE string
 type TASK_CALLBACK = func(t *Task)
 
 type Task struct {
-	Name      string
-	Condition string
-	FirstRun  string
-	Time      string
-	LastRun   string
-	Cb        TASK_CALLBACK
+	Name     string
+	Every    string
+	FirstRun string
+	Time     string
+	LastRun  string
+	Cb       TASK_CALLBACK
 }
 
 type TaskCondition struct {
-	expression   string
 	timeDuration string
 	timeSuffix   string
 }
@@ -60,20 +59,15 @@ func (t *Task) reschedule() {
 }
 
 func (t *Task) parseTaskCondition() *TaskCondition {
-	if t.Condition != "" {
-		splitted := strings.Split(t.Condition, " ")
+	if t.Every != "" {
+		splitted := strings.Split(t.Every, " ")
 
-		if len(splitted) < 3 {
+		if len(splitted) < 2 {
 			return nil
 		}
 
-		expression := splitted[0]
-		timeDuration := splitted[1]
-		timeSuffix := splitted[2]
-
-		if expression != "every" {
-			return nil
-		}
+		timeDuration := splitted[0]
+		timeSuffix := splitted[1]
 
 		if strings.Contains(timeSuffix, "hour") {
 			timeSuffix = "hour"
@@ -88,7 +82,6 @@ func (t *Task) parseTaskCondition() *TaskCondition {
 		}
 
 		return &TaskCondition{
-			expression,
 			timeDuration,
 			timeSuffix,
 		}
